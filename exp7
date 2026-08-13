@@ -1,0 +1,27 @@
+import cv2
+import numpy as np
+
+# Read the image
+img = cv2.imread("mount.jpg")
+
+# Check if the image is loaded successfully
+if img is None:
+    print("Image not found!")
+else:
+    # Create a 5x5 kernel
+    kernel = np.ones((5, 5), np.uint8)
+
+    # Apply dilation
+    dilated_img = cv2.dilate(img, kernel, iterations=1)
+
+    # Display the original image
+    cv2.imshow("Original Image", img)
+
+    # Display the dilated image
+    cv2.imshow("Dilated Image", dilated_img)
+
+    # Wait until a key is pressed
+    cv2.waitKey(0)
+
+    # Close all OpenCV windows
+    cv2.destroyAllWindows()
