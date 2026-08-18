@@ -1,0 +1,36 @@
+import cv2
+
+# Read the image
+img = cv2.imread("mount.jpg")
+
+if img is None:
+    print("Image not found!")
+else:
+    # Get image dimensions
+    height, width = img.shape[:2]
+
+    print("Image Size:", width, "x", height)
+
+    # Select ROI from the image
+    roi = img[20:68, 20:127]
+
+    # Copy the ROI
+    copied_roi = roi.copy()
+
+    # Get ROI size
+    roi_height, roi_width = copied_roi.shape[:2]
+
+    # Paste the copied ROI at a new location
+    y = 0
+    x = width - roi_width
+
+    img[y:y + roi_height, x:x + roi_width] = copied_roi
+
+    # Display cropped ROI
+    cv2.imshow("Cropped ROI", copied_roi)
+
+    # Display final image
+    cv2.imshow("Copied and Pasted Image", img)
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
