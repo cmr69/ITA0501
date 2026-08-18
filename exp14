@@ -1,0 +1,46 @@
+import cv2
+import numpy as np
+
+# Read the image
+img = cv2.imread("mount.jpg")
+
+# Check whether image is loaded
+if img is None:
+    print("Image not found!")
+else:
+    # Get image dimensions
+    height, width = img.shape[:2]
+
+    # Four points from the original image
+    pts1 = np.float32([
+        [0, 0],
+        [width - 1, 0],
+        [0, height - 1],
+        [width - 1, height - 1]
+    ])
+
+    # Four corresponding points for perspective transformation
+    pts2 = np.float32([
+        [50, 50],
+        [width - 50, 30],
+        [30, height - 50],
+        [width - 30, height - 30]
+    ])
+
+    # Create perspective transformation matrix
+    matrix = cv2.getPerspectiveTransform(pts1, pts2)
+
+    # Apply perspective transformation
+    result = cv2.warpPerspective(img, matrix, (width, height))
+
+    # Display original image
+    cv2.imshow("Original Image", img)
+
+    # Display perspective transformed image
+    cv2.imshow("Perspective Transformation", result)
+
+    # Wait for key press
+    cv2.waitKey(0)
+
+    # Close all windows
+    cv2.destroyAllWindows()
