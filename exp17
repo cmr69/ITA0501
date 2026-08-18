@@ -1,0 +1,55 @@
+import cv2
+
+# Read the original image
+img = cv2.imread("mount.jpg")
+
+# Check if image is loaded
+if img is None:
+    print("Image not found!")
+else:
+    # Watermark text
+    text = "WATERMARK"
+
+    # Position of watermark
+    position = (50, 50)
+
+    # Font
+    font = cv2.FONT_HERSHEY_SIMPLEX
+
+    # Font size
+    font_scale = 1
+
+    # Text color (white)
+    color = (255, 255, 255)
+
+    # Thickness of text
+    thickness = 2
+
+    # Insert watermark
+    watermarked = img.copy()
+
+    cv2.putText(
+        watermarked,
+        text,
+        position,
+        font,
+        font_scale,
+        color,
+        thickness,
+        cv2.LINE_AA
+    )
+
+    # Display original image
+    cv2.imshow("Original Image", img)
+
+    # Display watermarked image
+    cv2.imshow("Watermarked Image", watermarked)
+
+    # Wait for key press
+    cv2.waitKey(0)
+
+    # Close all windows
+    cv2.destroyAllWindows()
+
+    # Save the watermarked image
+    cv2.imwrite("watermarked_mount.jpg", watermarked)
