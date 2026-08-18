@@ -1,0 +1,16 @@
+import cv2
+
+# Read the image
+img = cv2.imread("mount.jpg")
+
+if img is None:
+    print("Image not found!")
+else:
+    # Rotate 180 degrees
+    rotated = cv2.flip(img, -1)
+
+    cv2.imshow("Original Image", img)
+    cv2.imshow("180 Degree Rotated Image", rotated)
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
