@@ -1,0 +1,27 @@
+import cv2
+import numpy as np
+
+# Read the image
+img = cv2.imread("mount.jpg")
+
+# Check if image is loaded
+if img is None:
+    print("Image not found!")
+else:
+    # Create a kernel
+    kernel = np.ones((5, 5), np.uint8)
+
+    # Apply erosion
+    eroded = cv2.erode(img, kernel, iterations=1)
+
+    # Display original image
+    cv2.imshow("Original Image", img)
+
+    # Display eroded image
+    cv2.imshow("Eroded Image", eroded)
+
+    # Wait for key press
+    cv2.waitKey(0)
+
+    # Close all windows
+    cv2.destroyAllWindows()
