@@ -1,0 +1,27 @@
+import cv2
+import numpy as np
+
+# Read the image
+img = cv2.imread("mount.jpg")
+
+# Check if image is loaded
+if img is None:
+    print("Image not found!")
+else:
+    # Create a 5x5 kernel
+    kernel = np.ones((5, 5), np.uint8)
+
+    # Apply Opening operation
+    opening = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+
+    # Display original image
+    cv2.imshow("Original Image", img)
+
+    # Display opening result
+    cv2.imshow("Opening Operation", opening)
+
+    # Wait for key press
+    cv2.waitKey(0)
+
+    # Close all windows
+    cv2.destroyAllWindows()
